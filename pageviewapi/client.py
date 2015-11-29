@@ -5,7 +5,6 @@ import requests
 
 
 API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews"
-# PER_ARTICLE = "/per-article/en.wikipedia/all-access/all-agents/Paris/daily/20151110/20151117"
 PER_ARTICLE = "per-article"
 PA_ARGS = "{project}/{access}/{agent}/{page}/{granularity}/{start}/{end}"
 
