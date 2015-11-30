@@ -5,12 +5,17 @@ import requests
 
 
 API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews"
-PER_ARTICLE = "per-article"
+# Per article
+PA_ENDPOINT = "per-article"
 PA_ARGS = "{project}/{access}/{agent}/{page}/{granularity}/{start}/{end}"
+
+# Top
+TOP_ENDPOINT = "top"
+TOP_ARGS = "{project}/{access}/{year}/{month}/{day}"
 
 
 def per_article(project, page, start, end,
-                access='all-access', agent='all-agents',granularity='daily'):
+                access='all-access', agent='all-agents', granularity='daily'):
     """Per article API.
 
     >>> import pageviewapi as pv
@@ -24,5 +29,23 @@ def per_article(project, page, start, end,
                           access=access,
                           agent=agent,
                           granularity=granularity)
-    url = "/".join([API_BASE_URL, PER_ARTICLE, args])
+    url = "/".join([API_BASE_URL, PA_ENDPOINT, args])
+    return AttrDict(requests.get(url).json())
+
+
+def top(project, year, month, day, access='all-access'):
+    """Top 1000 most visited articles from project on a given date.
+
+    >>> import pageviewapi
+    >>> views = pageviewapi('fr.wikipedia', 2015, 11, 14)
+    >>> views['items'][0]['articles'][0]
+    {u'article': u'Wikip\xe9dia:Accueil_principal', u'rank': 1,
+    u'views': 1600547}
+    """
+    args = TOP_ARGS.format(project=project,
+                           access=access,
+                           year=year,
+                           month=month,
+                           day=day)
+    url = "/".join([API_BASE_URL, TOP_ENDPOINT, args])
     return AttrDict(requests.get(url).json())
