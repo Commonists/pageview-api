@@ -35,8 +35,7 @@ def per_article(project, page, start, end,
                           access=access,
                           agent=agent,
                           granularity=granularity)
-    url = "/".join([API_BASE_URL, PA_ENDPOINT, args])
-    return AttrDict(requests.get(url, headers=USER_AGENT).json())
+    return __api__(PA_ENDPOINT, args)
 
 
 def top(project, year, month, day, access='all-access'):
@@ -53,5 +52,10 @@ def top(project, year, month, day, access='all-access'):
                            year=year,
                            month=month,
                            day=day)
-    url = "/".join([API_BASE_URL, TOP_ENDPOINT, args])
+    return __api__(TOP_ENDPOINT, args)
+
+
+def __api__(end_point, args, api_url=API_BASE_URL):
+    """Calling API."""
+    url = "/".join([api_url, end_point, args])
     return AttrDict(requests.get(url, headers=USER_AGENT).json())
