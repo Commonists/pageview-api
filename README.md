@@ -22,3 +22,9 @@ Most viewed articles on French Wikipedia on November 14th, 2015
 import pageviewapi
 pageviewapi.top('fr.wikipedia', 2015, 11, 14)
 ```
+
+Sum of view during last 30, 60, 90 days
+```python
+import pageviewapi.last
+pageviewapi.last.last30('en.wikipedia', 'Paris')
+```
