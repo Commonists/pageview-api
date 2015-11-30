@@ -1,4 +1,13 @@
-"""Client to wikimedia pageview api."""
+"""Client to wikimedia pageview api.
+
+API doc: https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageview_API
+Supported endpoints:
+- per-article
+- top
+
+Future support:
+- aggregate
+"""
 
 from attrdict import AttrDict
 import requests
