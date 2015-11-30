@@ -4,6 +4,12 @@ from attrdict import AttrDict
 import requests
 
 
+# User-agent
+PROJECT_URL = "https://github.com/Commonists/pageview-api"
+USER_AGENT = {
+    'User-Agent': "Python pageview-api client <{url}>".format(url=PROJECT_URL)
+}
+
 API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews"
 # Per article
 PA_ENDPOINT = "per-article"
@@ -30,7 +36,7 @@ def per_article(project, page, start, end,
                           agent=agent,
                           granularity=granularity)
     url = "/".join([API_BASE_URL, PA_ENDPOINT, args])
-    return AttrDict(requests.get(url).json())
+    return AttrDict(requests.get(url, headers=USER_AGENT).json())
 
 
 def top(project, year, month, day, access='all-access'):
@@ -48,4 +54,4 @@ def top(project, year, month, day, access='all-access'):
                            month=month,
                            day=day)
     url = "/".join([API_BASE_URL, TOP_ENDPOINT, args])
-    return AttrDict(requests.get(url).json())
+    return AttrDict(requests.get(url, headers=USER_AGENT).json())
