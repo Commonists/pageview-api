@@ -4,8 +4,6 @@ API doc: https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageview_API
 Supported endpoints:
 - per-article
 - top
-
-Future support:
 - aggregate
 """
 
@@ -27,6 +25,10 @@ PA_ARGS = "{project}/{access}/{agent}/{page}/{granularity}/{start}/{end}"
 # Top
 TOP_ENDPOINT = "top"
 TOP_ARGS = "{project}/{access}/{year}/{month}/{day}"
+
+# aggregate
+AG_ENDPOINT = "aggregate"
+AG_ARGS = "{project}/{access}/{agent}/{granularity}/{start}/{end}"
 
 
 def per_article(project, page, start, end,
@@ -62,6 +64,22 @@ def top(project, year, month, day, access='all-access'):
                            month=month,
                            day=day)
     return __api__(TOP_ENDPOINT, args)
+
+
+def aggregate(project, start, end,
+              access='all-access', agent='all-agents', granularity='daily'):
+    """Aggregate API.
+
+    >>> import pageviewapi
+    >>> pageviewapi.aggregate('fr.wikipedia', '2015100100', '2015103100')
+    """
+    args = AG_ARGS.format(project=project,
+                          start=start,
+                          end=end,
+                          access=access,
+                          agent=agent,
+                          granularity=granularity)
+    return __api__(AG_ENDPOINT, args)
 
 
 def __api__(end_point, args, api_url=API_BASE_URL):
