@@ -24,8 +24,8 @@ def per_article(project, page, start, end,
                 access='all-access', agent='all-agents', granularity='daily'):
     """Per article API.
 
-    >>> import pageviewapi as pv
-    >>> pv.per_article('en.wikipedia', 'Paris', '20151106', '20151120')
+    >>> import pageviewapi
+    >>> pageview.per_article('en.wikipedia', 'Paris', '20151106', '20151120')
     will requests views for Paris article between 2015-11-06 and 2015-11-20
     """
     args = PA_ARGS.format(project=project,
@@ -42,7 +42,7 @@ def top(project, year, month, day, access='all-access'):
     """Top 1000 most visited articles from project on a given date.
 
     >>> import pageviewapi
-    >>> views = pageviewapi('fr.wikipedia', 2015, 11, 14)
+    >>> views = pageviewapi.top('fr.wikipedia', 2015, 11, 14)
     >>> views['items'][0]['articles'][0]
     {u'article': u'Wikip\xe9dia:Accueil_principal', u'rank': 1,
     u'views': 1600547}
