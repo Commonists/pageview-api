@@ -35,8 +35,11 @@ import pageviewapi
 pageviewapi.top('fr.wikipedia', 2015, 11, 14, access='all-access')
 ```
 
-Sum of view during last 30, 60, 90 days
+Sum (resp. average) of view during last 30 days
 ```python
-import pageviewapi.last
-pageviewapi.last.last30('en.wikipedia', 'Paris', access='all-access', agent='all-agents')
+import pageviewapi.period
+pageviewapi.period.sum_last('fr.wikipedia', 'Paris', last=30,
+                            access='all-access', agent='all-agents')
+
+pageviewapi.period.avg_last('fr.wikipedia', 'Paris', last=30)
 ```
