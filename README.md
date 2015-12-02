@@ -8,7 +8,7 @@ In order to install system wide on system using sudo you can use:
 pip install attrdict
 git clone https://github.com/Commonists/pageview-api
 cd pageview-api
-sudo python pageview-api install
+sudo python setup.py install
 ```
 
 Examples
