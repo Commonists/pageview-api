@@ -10,11 +10,13 @@ Supported endpoints:
 from attrdict import AttrDict
 import requests
 
+__version__ = "0.2.1"
 
 # User-agent
 PROJECT_URL = "https://github.com/Commonists/pageview-api"
+UA = "Python pageview-api client v{version} <{url}>"
 USER_AGENT = {
-    'User-Agent': "Python pageview-api client <{url}>".format(url=PROJECT_URL)
+    'User-Agent': UA.format(url=PROJECT_URL, version=__version__)
 }
 
 API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews"
