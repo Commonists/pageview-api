@@ -33,6 +33,7 @@ def __days_ago__(days):
     ago = today - delta
     return ago.strftime('%Y%m%d')
 
-def __avg__(l):
+
+def __avg__(numericlist):
     """Basic average function."""
-    return sum(l)/float(len(l))
+    return sum(numericlist)/float(len(numericlist))
