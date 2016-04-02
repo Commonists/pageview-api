@@ -101,3 +101,18 @@ class APIValues(object):
         """
         return sorted([vars(cls)[variable] for variable in dir(cls)
                        if variable.isupper()])
+
+
+class Access(APIValues):
+    """Access values allows to filter by access.
+
+    If you want to filter by mobile use:
+        Mobile application: Access.MOBILE_APP
+        Mobile web: Access.MOBILE_WEB
+        Desktop: Access.DESKTOP
+        Default: Access.ALL_ACCESS
+    """
+    ALL_ACCESS = "all-access"
+    DESKTOP = "desktop"
+    MOBILE_APP = "mobile-app"
+    MOBILE_WEB = "mobile-web"
