@@ -116,3 +116,17 @@ class Access(APIValues):
     DESKTOP = "desktop"
     MOBILE_APP = "mobile-app"
     MOBILE_WEB = "mobile-web"
+
+
+class Agent(APIValues):
+    """Agent values allows to filter by kind of user-agent.
+
+    All: Agent.ALL_AGENTS
+    User: Agent.USER
+    Bot: Agent.BOT
+    Spider: Agent.SPIDER
+    """
+    ALL_AGENTS = "all-agents"
+    USER = "user"
+    BOT = "bot"
+    SPIDER = "spider"
