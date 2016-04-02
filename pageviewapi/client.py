@@ -88,3 +88,16 @@ def __api__(end_point, args, api_url=API_BASE_URL):
     """Calling API."""
     url = "/".join([api_url, end_point, args])
     return AttrDict(requests.get(url, headers=USER_AGENT).json())
+
+
+class APIValues(object):
+
+    @classmethod
+    def allvalues(cls):
+        """All values in the enum class.
+
+        Returns:
+            All upper cased value from APIValues.
+        """
+        return sorted([vars(cls)[variable] for variable in dir(cls)
+                       if variable.isupper()])
