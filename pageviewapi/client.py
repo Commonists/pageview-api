@@ -10,7 +10,7 @@ Supported endpoints:
 from attrdict import AttrDict
 import requests
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 
 # User-agent
 PROJECT_URL = "https://github.com/Commonists/pageview-api"
