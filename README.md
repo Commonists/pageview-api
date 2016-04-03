@@ -1,5 +1,6 @@
 # pageview-api
 [![Build Status](https://travis-ci.org/Commonists/pageview-api.svg?branch=master)](https://travis-ci.org/Commonists/pageview-api)
+[![Code Health](https://landscape.io/github/Commonists/pageview-api/master/landscape.svg?style=flat)](https://landscape.io/github/Commonists/pageview-api/master)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 Wikimedia Pageview API client
