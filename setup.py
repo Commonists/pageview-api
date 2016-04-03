@@ -25,7 +25,7 @@ classifiers = [
     'Topic :: Utilities'
 ]
 packages = ['pageviewapi']
-requires = ['requests', 'attrdict', 'six']
+requires = ['requests', 'attrdict']
 
 setup(
     name='pageviewapi',
