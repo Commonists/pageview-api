@@ -36,4 +36,4 @@ def __days_ago__(days):
 
 def __avg__(numericlist):
     """Basic average function."""
-    return sum(numericlist)/float(len(numericlist))
+    return sum(numericlist) / float(len(numericlist))
