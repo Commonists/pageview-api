@@ -1,4 +1,6 @@
 # pageview-api
+[![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
+
 Wikimedia Pageview API client
 
 Installation
