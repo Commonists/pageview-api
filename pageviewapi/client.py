@@ -19,18 +19,22 @@ USER_AGENT = {
     'User-Agent': UA.format(url=PROJECT_URL, version=__version__)
 }
 
-API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews"
+API_BASE_URL = "https://wikimedia.org/api/rest_v1/metrics"
 # Per article
-PA_ENDPOINT = "per-article"
+PA_ENDPOINT = "pageviews/per-article"
 PA_ARGS = "{project}/{access}/{agent}/{page}/{granularity}/{start}/{end}"
 
 # Top
-TOP_ENDPOINT = "top"
+TOP_ENDPOINT = "pageviews/top"
 TOP_ARGS = "{project}/{access}/{year}/{month}/{day}"
 
 # aggregate
-AG_ENDPOINT = "aggregate"
+AG_ENDPOINT = "pageviews/aggregate"
 AG_ARGS = "{project}/{access}/{agent}/{granularity}/{start}/{end}"
+
+# unique-devices
+UD_ENDPOINT = "unique-devices"
+UD_ARGS = "{project}/{access}/{granularity}/{start}/{end}"
 
 
 def per_article(project, page, start, end,
@@ -82,6 +86,17 @@ def aggregate(project, start, end,
                           agent=agent,
                           granularity=granularity)
     return __api__(AG_ENDPOINT, args)
+
+
+def unique_devices(project, start, end,
+                   access="all-access", granularity="daily"):
+    """Unique devices."""
+    args = UD_ARGS.format(project=project,
+                          start=start,
+                          end=end,
+                          access=access,
+                          granularity=granularity)
+    return __api__(UD_ENDPOINT, args)
 
 
 def __api__(end_point, args, api_url=API_BASE_URL):
