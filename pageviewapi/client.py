@@ -37,6 +37,24 @@ UD_ENDPOINT = "unique-devices"
 UD_ARGS = "{project}/{access}/{granularity}/{start}/{end}"
 
 
+class ZeroOrDataNotLoadedException(Exception):
+    """Raised for 404 Error
+
+    404 may happen when there is no data or data has not been filled yet.
+    https://wikitech.wikimedia.org/wiki/Analytics/PageviewAPI#Gotchas
+    """
+    pass
+
+
+class ThrottlingException(Exception):
+    """Raise for 429 Error
+
+    Client doing too many request may be subject to throttling.
+    Requests in cache are not throttled (throttling is done at storage layer).
+    https://wikitech.wikimedia.org/wiki/Analytics/PageviewAPI#Gotchas
+    """
+
+
 def per_article(project, page, start, end,
                 access='all-access', agent='all-agents', granularity='daily'):
     """Per article API.
@@ -102,46 +120,13 @@ def unique_devices(project, start, end,
 def __api__(end_point, args, api_url=API_BASE_URL):
     """Calling API."""
     url = "/".join([api_url, end_point, args])
-    return AttrDict(requests.get(url, headers=USER_AGENT).json())
-
-
-class APIValues(object):
-
-    @classmethod
-    def allvalues(cls):
-        """All values in the enum class.
-
-        Returns:
-            All upper cased value from APIValues.
-        """
-        return sorted([vars(cls)[variable] for variable in dir(cls)
-                       if variable.isupper()])
-
-
-class Access(APIValues):
-    """Access values allows to filter by access.
-
-    If you want to filter by mobile use:
-        Mobile application: Access.MOBILE_APP
-        Mobile web: Access.MOBILE_WEB
-        Desktop: Access.DESKTOP
-        Default: Access.ALL_ACCESS
-    """
-    ALL_ACCESS = "all-access"
-    DESKTOP = "desktop"
-    MOBILE_APP = "mobile-app"
-    MOBILE_WEB = "mobile-web"
-
-
-class Agent(APIValues):
-    """Agent values allows to filter by kind of user-agent.
-
-    All: Agent.ALL_AGENTS
-    User: Agent.USER
-    Bot: Agent.BOT
-    Spider: Agent.SPIDER
-    """
-    ALL_AGENTS = "all-agents"
-    USER = "user"
-    BOT = "bot"
-    SPIDER = "spider"
+    response = requests.get(url, headers=USER_AGENT)
+    if response.status_code == 200:
+        # Everything went fine!
+        return AttrDict(response.json())
+    elif response.status_code == 404:
+        raise ZeroOrDataNotLoadedException
+    elif response.status_code == 429:
+        raise ThrottlingException
+    else:
+        response.raise_for_status()
