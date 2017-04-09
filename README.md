@@ -45,3 +45,9 @@ pageviewapi.period.sum_last('fr.wikipedia', 'Paris', last=30,
 
 pageviewapi.period.avg_last('fr.wikipedia', 'Paris', last=30)
 ```
+
+Monthly legacy pagecounts (2008 until end of 2016) on a project
+```python
+import pageviewapi
+pageviewapi.legacy_pagecounts('fr.wikipedia', '2010010100', '2011010100', granularity='monthly')
+```
