@@ -36,6 +36,10 @@ AG_ARGS = "{project}/{access}/{agent}/{granularity}/{start}/{end}"
 UD_ENDPOINT = "unique-devices"
 UD_ARGS = "{project}/{access}/{granularity}/{start}/{end}"
 
+# legacy pagecounts
+PC_ENDPOINT = "legacy/pagecounts/aggregate"
+PC_ARGS = "{project}/{access_site}/{granularity}/{start}/{end}"
+
 
 class ZeroOrDataNotLoadedException(Exception):
     """Raised for 404 Error
@@ -107,7 +111,7 @@ def aggregate(project, start, end,
 
 
 def unique_devices(project, start, end,
-                   access="all-access", granularity="daily"):
+                   access='all-access', granularity='daily'):
     """Unique devices."""
     args = UD_ARGS.format(project=project,
                           start=start,
@@ -115,6 +119,24 @@ def unique_devices(project, start, end,
                           access=access,
                           granularity=granularity)
     return __api__(UD_ENDPOINT, args)
+
+
+def legacy_pagecounts(project, start, end,
+                      access_site='all-sites', granularity='daily'):
+    """Legacy pagecounts
+
+    >>> import pageviewapi
+    >>> pageviewapi.legacy_pagecounts('fr.wikipedia', '2010010100', '2011010100')
+    """
+    project_arg = 'all-projects'
+    if project != 'all-projects':
+        project_arg = '{}.org'.format(project)
+    args = PC_ARGS.format(project=project_arg,
+                          start=start,
+                          end=end,
+                          access_site=access_site,
+                          granularity=granularity)
+    return __api__(PC_ENDPOINT, args)
 
 
 def __api__(end_point, args, api_url=API_BASE_URL):
