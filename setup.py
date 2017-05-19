@@ -32,7 +32,7 @@ setup(
     version=version,
     author='Commonists',
     author_email='ps.huard@gmail.com',
-    url='http://github.com/Commonists/pageviewapi',
+    url='http://github.com/Commonists/pageview-api',
     description='Wikimedia Pageview API client',
     long_description=open('README.md').read(),
     license='MIT',
