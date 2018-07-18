@@ -10,7 +10,7 @@ Supported endpoints:
 from attrdict import AttrDict
 import requests
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 # User-agent
 PROJECT_URL = "https://github.com/Commonists/pageview-api"
@@ -27,6 +27,10 @@ PA_ARGS = "{project}/{access}/{agent}/{page}/{granularity}/{start}/{end}"
 # Top
 TOP_ENDPOINT = "pageviews/top"
 TOP_ARGS = "{project}/{access}/{year}/{month}/{day}"
+
+# Top by country
+TBC_ENDPOINT = "pageviews/top-by-country"
+TBC_ARGS = "{project}/{access}/{year}/{month}"
 
 # aggregate
 AG_ENDPOINT = "pageviews/aggregate"
@@ -92,6 +96,18 @@ def top(project, year, month, day, access='all-access'):
                            month=month,
                            day=day)
     return __api__(TOP_ENDPOINT, args)
+
+
+def top_by_country(project, year, month, access='all-access'):
+    """Pageviews to this project, split by country of origin for a given month.
+
+    For privacy concerns figures are given in buckets.
+    """
+    args = TBC_ARGS.format(project=project,
+                           access=access,
+                           year=year,
+                           month=month)
+    return __api__(TBC_ENDPOINT, args)
 
 
 def aggregate(project, start, end,
