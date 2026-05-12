@@ -1,9 +1,25 @@
-"""Python client for wikimedia pageview api."""
+"""Python client for the Wikimedia Pageview API."""
 
 from pageviewapi.client import (
+    PageviewResponse,
+    ThrottlingException,
+    ZeroOrDataNotLoadedException,
+    __version__,
+    aggregate,
+    legacy_pagecounts,
     per_article,
     top,
-    aggregate,
     unique_devices,
-    legacy_pagecounts,
-    __version__)
+)
+
+__all__ = [
+    "__version__",
+    "aggregate",
+    "PageviewResponse",
+    "legacy_pagecounts",
+    "per_article",
+    "ThrottlingException",
+    "top",
+    "unique_devices",
+    "ZeroOrDataNotLoadedException",
+]

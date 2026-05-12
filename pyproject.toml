@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pageviewapi"
+version = "0.4.0"
+description = "Wikimedia Pageview API client"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Commonists", email = "ps.huard@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = ["requests>=2.0"]
+
+[project.urls]
+Homepage = "https://github.com/Commonists/pageview-api"
+
+[dependency-groups]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "ruff>=0.9", "pytest-mock>=3.0"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["pageviewapi"]
