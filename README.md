@@ -1,10 +1,10 @@
 # pageview-api
-[![Build Status](https://travis-ci.org/Commonists/pageview-api.svg?branch=master)](https://travis-ci.org/Commonists/pageview-api)
-[![Code Health](https://landscape.io/github/Commonists/pageview-api/master/landscape.svg?style=flat)](https://landscape.io/github/Commonists/pageview-api/master)
+[![CI](https://github.com/Commonists/pageview-api/actions/workflows/ci.yml/badge.svg)](https://github.com/Commonists/pageview-api/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Commonists/pageview-api/branch/master/graph/badge.svg)](https://codecov.io/gh/Commonists/pageview-api)
 [![Pypi](https://img.shields.io/pypi/v/pageviewapi.svg?style=flat)](https://pypi.python.org/pypi/pageviewapi)
 [![License](http://img.shields.io/badge/license-MIT-orange.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-Wikimedia Pageview API client
+Wikimedia Pageview API client for Python 3.10+
 
 Installation
 ------------

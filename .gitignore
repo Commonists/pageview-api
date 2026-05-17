@@ -40,3 +40,15 @@ cover/
 # Typical virtual environments
 .venv
 venv
+
+# uv
+uv.lock
+.python-version
+
+# pytest / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ruff
+.ruff_cache/
