@@ -11,6 +11,7 @@ from pageviewapi.client import (
     ThrottlingException,
     ZeroOrDataNotLoadedException,
     _api,
+    _quote_article_name,
     aggregate,
     legacy_pagecounts,
     per_article,
@@ -209,3 +210,26 @@ def test_api_returns_pageview_response(ok_response):
     with patch("requests.get", return_value=ok_response):
         result = per_article("en.wikipedia", "Paris", "20151106", "20151120")
     assert isinstance(result, PageviewResponse)
+
+
+def test_quote_article_name_plain():
+    assert _quote_article_name("Paris") == "Paris"
+
+
+def test_quote_article_name_slash():
+    assert _quote_article_name("AC/DC") == "AC%2FDC"
+
+
+def test_per_article_encodes_space_in_page_name(ok_response):
+    with patch("requests.get", return_value=ok_response) as mock_get:
+        per_article("en.wikipedia", "New York", "20200101", "20200131")
+    url = mock_get.call_args[0][0]
+    assert "New%20York" in url
+    assert "New York" not in url
+
+
+def test_per_article_encodes_slash_in_page_name(ok_response):
+    with patch("requests.get", return_value=ok_response) as mock_get:
+        per_article("en.wikipedia", "AC/DC", "20200101", "20200131")
+    url = mock_get.call_args[0][0]
+    assert "AC%2FDC" in url
