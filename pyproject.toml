@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pageviewapi"
-version = "0.4.0"
+version = "0.5.0"
 description = "Wikimedia Pageview API client"
 readme = "README.md"
 license = { text = "MIT" }
