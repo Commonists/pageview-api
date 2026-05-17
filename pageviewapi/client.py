@@ -11,6 +11,7 @@ Supported endpoints:
 
 from importlib.metadata import PackageNotFoundError, version
 from typing import Any
+from urllib.parse import quote, unquote
 
 import requests
 
@@ -100,7 +101,7 @@ def per_article(
     """
     args = PA_ARGS.format(
         project=project,
-        page=page,
+        page=_quote_article_name(page),
         start=start,
         end=end,
         access=access,
@@ -199,3 +200,7 @@ def _api(end_point: str, args: str, api_url: str = API_BASE_URL) -> dict[str, An
     else:
         response.raise_for_status()
         return {}  # unreachable, satisfies type checker
+
+
+def _quote_article_name(page: str) -> str:
+    return quote(unquote(page), safe="")
